@@ -14,13 +14,29 @@ import com.michaelcgood.queue.MessagePublisher;
 import com.michaelcgood.queue.MessagePublisherImpl;
 import com.michaelcgood.queue.MessageSubscriber;
 
+import org.springframework.beans.factory.annotation.Value;
+
+
 @Configuration
 @ComponentScan("com.michaelcgood")
 public class RedisConfig {
 
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.redis.port}")
+    private int redisPort;
+    
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory();
+        //return new JedisConnectionFactory();
+        
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName(redisHost);
+        factory.setPort(redisPort);
+        factory.setUsePool(true);
+        return factory;
+        
     }
 
     @Bean
