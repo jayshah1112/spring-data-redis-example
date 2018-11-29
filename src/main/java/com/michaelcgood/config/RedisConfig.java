@@ -34,7 +34,7 @@ public class RedisConfig {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(redisHost);
         factory.setPort(redisPort);
-        factory.setUsePool(true);
+        //factory.setUsePool(true);
         return factory;
         
     }
